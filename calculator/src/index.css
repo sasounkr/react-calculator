@@ -1,13 +1,53 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+/* I wrote this */
+.operator {
+  background-color: #f5923e;
+}
+button {
+  color: black;
+  background-color: #e0e0e0;
+  border-style: solid;
+  border-width: 1px;
+  padding: none;
+}
+.button-pad {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-style: none;
+  height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#button0 {
+  grid-column: 1/3;
+}
+
+#output {
+  background-color: #858694;
+
+}
+
+.calculator {
+  height: 100%;
+}
+/* 
+For the styling below, I referenced the solution
+*/
+
+html {
+  height: 100%;
+  font-size: 40px;
+  border-color: hotpink;
+}
+
+body {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  border-style: none;
 }

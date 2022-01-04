@@ -9,7 +9,7 @@ const MULTIPLICATION_SIGN = "×";
 class Button extends React.Component {
   render() {
     return (
-      <button value={this.props.value} onClick={this.props.onClick}>{this.props.value}</button>
+      <button id={this.props.id} className={this.props.className} value={this.props.value} onClick={this.props.onClick}>{this.props.value}</button>
     )
   }
 }
@@ -19,30 +19,30 @@ class ButtonPad extends React.Component {
     // console.log(typeof this.props.handleClick)
     // this.props.handleClick({target:{value:'1'}});
     return (
-      <div>
+      <div className='button-pad'>
         <Button value="AC" onClick={this.props.onClick} />
         <Button value="+/-" onClick={this.props.onClick} />
         <Button value="%" onClick={this.props.onClick} />
-        <Button value={DIVISION_SIGN} onClick={this.props.onClick} />
+        <Button value={DIVISION_SIGN} onClick={this.props.onClick} className="operator" />
 
         <Button value="7" onClick={this.props.onClick} />
         <Button value="8" onClick={this.props.onClick} />
         <Button value="9" onClick={this.props.onClick} />
-        <Button value={MULTIPLICATION_SIGN} onClick={this.props.onClick} />
+        <Button value={MULTIPLICATION_SIGN} onClick={this.props.onClick} className='operator' />
 
         <Button value="4" onClick={this.props.onClick} />
         <Button value="5" onClick={this.props.onClick} />
         <Button value="6" onClick={this.props.onClick} />
-        <Button value="-" onClick={this.props.onClick} />
+        <Button value="-" onClick={this.props.onClick} className='operator' />
 
         <Button value="1" onClick={this.props.onClick} />
         <Button value="2" onClick={this.props.onClick} />
         <Button value="3" onClick={this.props.onClick} />
-        <Button value="+" onClick={this.props.onClick} />
+        <Button value="+" onClick={this.props.onClick} className='operator' />
 
-        <Button value="0" onClick={this.props.onClick} />
+        <Button id="button0" value="0" onClick={this.props.onClick} />
         <Button value="." onClick={this.props.onClick} />
-        <Button value="=" onClick={this.props.onClick} />
+        <Button value="=" onClick={this.props.onClick} className='operator' />
 
 
       </div>
@@ -55,7 +55,7 @@ class Output extends React.Component {
 
   render() {
     return (
-      <div>{this.props.value}</div>
+      <div id='output' style={{color:"white"}}>{this.props.value}</div>
     );
   }
 }
@@ -96,6 +96,7 @@ class Calculator extends React.Component {
   }
 
   isOp(token) {
+    // yeah... i know...
     return (
       /[+-]/.test(token) || 
       MULTIPLICATION_SIGN === token ||
@@ -120,7 +121,8 @@ class Calculator extends React.Component {
         // output = this.state.output + value; 
         output = (output === "0") ? value : this.state.output + value; 
       } 
-      
+    } else if ("+/-" === value) {
+      output = -parseFloat(output);
     } else if ("AC" === value) {
       prevNum = null;
       prevOp = null;
@@ -129,17 +131,19 @@ class Calculator extends React.Component {
       resetNum = true;
       prevNum = this.state.output;
       prevOp = value
-    } else if ("=" === value) {
+    } else if ("=" === value && this.isOp(prevOp)) {
       output = this.executeOp(parseFloat(prevNum), prevOp, parseFloat(output))
-    } else {
-      output = "";
-    }
+    } else if ("." === value) {
+      prevOp = ".";
+      output = parseFloat(output) / 100;
+    } 
+
     this.setState({output, prevNum, prevOp, resetNum});
   }
 
   render() {
     return (
-      <div>
+      <div className='calculator'>
         <Output value={this.state.output} />
         <ButtonPad onClick={this.handleClick}/>
       </div>
@@ -149,7 +153,7 @@ class Calculator extends React.Component {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Calculator />
+    <Calculator className='calculator' />
   </React.StrictMode>,
   document.getElementById('root')
 );
