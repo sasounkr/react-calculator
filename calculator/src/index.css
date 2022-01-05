@@ -53,3 +53,23 @@ body {
   height: 100%;
   border-style: none;
 }
+
+/* just copy/pasted this part below cuz lazy... */
+
+/* @media (min-width: 400px) and (min-height: 400px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 500px) and (min-height: 500px) {
+  html {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 600px) and (min-height: 600px) {
+  html {
+    font-size: 40px;
+  }
+} */

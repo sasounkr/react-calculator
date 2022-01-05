@@ -133,10 +133,13 @@ class Calculator extends React.Component {
       prevOp = value
     } else if ("=" === value && this.isOp(prevOp)) {
       output = this.executeOp(parseFloat(prevNum), prevOp, parseFloat(output))
+    } else if ("%" === value) {
+      prevOp = "%";
+      output = parseFloat(output) / 100;
     } else if ("." === value) {
       prevOp = ".";
-      output = parseFloat(output) / 100;
-    } 
+      output += ".";
+    }
 
     this.setState({output, prevNum, prevOp, resetNum});
   }
